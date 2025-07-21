@@ -25,10 +25,8 @@ const AppRoutes = () => {
         <Route path="/documents" element={<div className="p-6">Documents - Coming Soon</div>} />
         <Route path="/workspaces" element={<div className="p-6">Workspaces Management - Coming Soon</div>} />
         <Route path="/users" element={<div className="p-6">User Management - Coming Soon</div>} />
-        <Route path="/system" element={<div className="p-6">System Settings - Coming Soon</div>} />
         <Route path="/upload" element={<div className="p-6">Document Upload - Coming Soon</div>} />
-        <Route path="/team" element={<div className="p-6">Team Management - Coming Soon</div>} />
-        <Route path="/workspace-settings" element={<div className="p-6">Workspace Settings - Coming Soon</div>} />
+        <Route path="/settings" element={<div className="p-6">Settings - Coming Soon</div>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </DashboardLayout>

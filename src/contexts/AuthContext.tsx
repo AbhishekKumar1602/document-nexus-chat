@@ -15,25 +15,15 @@ const mockUsers: Record<string, User & { password: string }> = {
     activeWorkspace: 'workspace-1',
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=admin'
   },
-  'workspace-admin@demo.com': {
+  'user@demo.com': {
     id: '2',
-    email: 'workspace-admin@demo.com',
-    password: 'admin123',
-    name: 'Workspace Admin',
-    role: 'workspace-admin',
-    workspaces: ['workspace-1', 'workspace-2'],
-    activeWorkspace: 'workspace-1',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=wadmin'
-  },
-  'member@demo.com': {
-    id: '3',
-    email: 'member@demo.com',
-    password: 'member123',
+    email: 'user@demo.com',
+    password: 'user123',
     name: 'John Doe',
-    role: 'workspace-member',
+    role: 'user',
     workspaces: ['workspace-1', 'workspace-3'],
     activeWorkspace: 'workspace-1',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=member'
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=user'
   }
 };
 

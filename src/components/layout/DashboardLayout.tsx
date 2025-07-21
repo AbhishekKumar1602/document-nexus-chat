@@ -76,7 +76,7 @@ const DashboardHeader = () => {
           <div className="flex items-center gap-3">
             <h1 className="text-xl font-semibold">DocuMind AI</h1>
             
-            {user?.role !== 'admin' && user?.workspaces && user.workspaces.length > 1 && (
+            {user?.workspaces && user.workspaces.length > 1 && (
               <Select
                 value={user.activeWorkspace}
                 onValueChange={switchWorkspace}
@@ -119,8 +119,7 @@ const DashboardHeader = () => {
                 <div className="flex items-center gap-2 mt-1">
                   <div className={cn(
                     "w-2 h-2 rounded-full",
-                    user?.role === 'admin' ? "bg-destructive" :
-                    user?.role === 'workspace-admin' ? "bg-warning" : "bg-success"
+                    user?.role === 'admin' ? "bg-destructive" : "bg-success"
                   )} />
                   <span className="text-xs capitalize">
                     {user?.role?.replace('-', ' ')}
@@ -160,17 +159,9 @@ const DashboardSidebar = () => {
       return [
         ...commonItems,
         { icon: Building2, label: 'Workspaces', path: '/workspaces' },
-        { icon: Users, label: 'All Users', path: '/users' },
-        { icon: Shield, label: 'System', path: '/system' },
-      ];
-    }
-
-    if (user?.role === 'workspace-admin') {
-      return [
-        ...commonItems,
+        { icon: Users, label: 'Users', path: '/users' },
         { icon: Upload, label: 'Upload', path: '/upload' },
-        { icon: Users, label: 'Team', path: '/team' },
-        { icon: Settings, label: 'Workspace', path: '/workspace-settings' },
+        { icon: Settings, label: 'Settings', path: '/settings' },
       ];
     }
 
