@@ -5,6 +5,8 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { TableRenderer } from './TableRenderer';
+import { parseMarkdownTable, hasMarkdownTable } from '@/utils/tableParser';
 import { 
   Select,
   SelectContent,
@@ -196,15 +198,42 @@ How else can I assist you today?`;
                   </Avatar>
                 )}
                 
-                <div className={cn(
-                  "max-w-[70%] rounded-lg px-4 py-3",
-                  message.role === 'user' 
-                    ? "bg-primary text-primary-foreground ml-12" 
-                    : "bg-muted"
-                )}>
-                  <div className="whitespace-pre-wrap text-sm">
-                    {message.content}
-                  </div>
+                 <div className={cn(
+                   "max-w-[70%] rounded-lg px-4 py-3",
+                   message.role === 'user' 
+                     ? "bg-primary text-primary-foreground ml-12" 
+                     : "bg-muted"
+                 )}>
+                   {message.role === 'assistant' && hasMarkdownTable(message.content) ? (
+                     <div>
+                       {(() => {
+                         const tableData = parseMarkdownTable(message.content);
+                         const parts = message.content.split(/\|(.+)\|\n\|[\s\-\|:]+\|\n((?:\|.+\|\n?)+)/);
+                         const beforeTable = parts[0]?.trim();
+                         const afterTable = parts[3]?.trim();
+                         
+                         return (
+                           <>
+                             {beforeTable && (
+                               <div className="whitespace-pre-wrap text-sm mb-4">
+                                 {beforeTable}
+                               </div>
+                             )}
+                             {tableData && <TableRenderer data={tableData} />}
+                             {afterTable && (
+                               <div className="whitespace-pre-wrap text-sm mt-4">
+                                 {afterTable}
+                               </div>
+                             )}
+                           </>
+                         );
+                       })()}
+                     </div>
+                   ) : (
+                     <div className="whitespace-pre-wrap text-sm">
+                       {message.content}
+                     </div>
+                   )}
                   
                   {message.sources && (
                     <div className="flex flex-wrap gap-1 mt-3">
